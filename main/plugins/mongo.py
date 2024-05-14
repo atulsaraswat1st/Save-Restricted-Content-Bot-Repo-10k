@@ -8,7 +8,7 @@ db = db.caption_db
 
 
 
-async def del_caption(user_id, replaced_word):
+async def re_caption(user_id, replaced_word):
     data = await check_premium(user_id)
     if data and data.get("_id"):
         await db.update_one({"_id": user_id}, {"$set": {"replaced_word": replaced_word}})
