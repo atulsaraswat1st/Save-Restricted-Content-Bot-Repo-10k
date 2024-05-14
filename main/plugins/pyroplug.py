@@ -24,7 +24,24 @@ logging.getLogger("telethon").setLevel(logging.INFO)
 
 def thumbnail(sender):
     return f'{sender}.jpg' if os.path.exists(f'{sender}.jpg') else f'thumb.jpg'
-      
+
+
+def replace_text(original_txt, to_replace, replacement):
+    replaced_txt = original_txt.replace(to_replace, replacement)
+    return replaced_txt
+  
+"""
+txt = "govina ji Hello how are you, or sb thik hai na"
+to_replace = "Hello how are you"
+replacement = "kya ho rha hai"
+
+replaced_txt = replace_text(txt, to_replace, replacement)
+
+
+print(replaced_txt)
+"""
+
+
 async def check(userbot, client, link):
     logging.info(link)
     msg_id = 0
