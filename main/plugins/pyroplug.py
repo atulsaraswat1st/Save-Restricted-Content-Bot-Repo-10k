@@ -3,7 +3,7 @@
 import asyncio, time, os
 
 from pyrogram.enums import ParseMode , MessageMediaType
-
+from main.plugins import mongo
 from .. import Bot, bot
 from main.plugins.progress import progress_for_pyrogram
 from main.plugins.helpers import screenshot
@@ -30,16 +30,6 @@ def replace_text(original_txt, to_replace, replacement):
     replaced_txt = original_txt.replace(to_replace, replacement)
     return replaced_txt
   
-"""
-txt = "govina ji Hello how are you, or sb thik hai na"
-to_replace = "Hello how are you"
-replacement = "kya ho rha hai"
-
-replaced_txt = replace_text(txt, to_replace, replacement)
-
-
-print(replaced_txt)
-"""
 
 
 async def check(userbot, client, link):
@@ -88,6 +78,19 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i, file_n):
         file = ""
         try:
             msg = await userbot.get_messages(chat_id = chat, message_ids = msg_id)
+
+            caption = msg.caption
+            if caption:
+              data = await mongo.check_premium(sender)  
+              if data and (data.get("replaced_word") or data.get("del_word")):
+                replacement = data.get("replaced_word")
+                to_replace = data.get("del_word")
+                caption = replace_text(caption, to_replace, replacement)
+              else:
+                caption = msg.caption
+            else:
+              caption = None  
+              
             logging.info(msg)
            # medi =  msg.document or msg.video or msg.audio or None
             if msg.service is not None:
