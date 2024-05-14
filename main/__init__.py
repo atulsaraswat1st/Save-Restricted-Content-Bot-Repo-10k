@@ -1,7 +1,7 @@
 #Join me at telegram @dev_gagan
 
 from pyrogram import Client
-
+from pyromod import listen
 from telethon.sessions import StringSession
 from telethon.sync import TelegramClient
 
