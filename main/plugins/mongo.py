@@ -1,7 +1,6 @@
 from motor.motor_asyncio import AsyncIOMotorClient as MongoCli
 
-MONGO_DB = "mongodb+srv://mahesh14757:Maheshsingh147@cluster0.nfx1mci.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-
+MONGO_DB = "mongosh "mongodb+srv://cluster0.rvjozss.mongodb.net/" --apiVersion 1 --username jit"
 mongo = MongoCli(MONGO_DB)
 db = mongo.captions
 db = db.caption_db
